@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SelectorControl : MonoBehaviour {
+public class SelectorKeyboardControl : MonoBehaviour {
 
 	public string Left;
 	public string Right;
