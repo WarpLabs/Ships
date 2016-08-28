@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		rb2d.AddForce (moveForce, ForceMode2D.Impulse);
 
-		if (Input.GetAxis ("Fire3") > 0) {
+		if (Input.GetAxis ("Walk") > 0) {
 			if (rb2d.velocity.magnitude > WalkSpeed)
 				rb2d.velocity = Vector2.ClampMagnitude (rb2d.velocity, WalkSpeed);
 		} else {
