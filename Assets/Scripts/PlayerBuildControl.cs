@@ -6,22 +6,26 @@ public class PlayerBuildControl : MonoBehaviour {
 	public GameObject Selector;
 	public DrawGrid Grid;
 
-	private bool BuildModeOn;
+	private bool BuildModeOn = false;
+
+
+	void Start () {
+
+		DisableBuild ();
+		
+	}
 
 	void Update () {
 
-		if (Input.GetButtonDown ("Build")) {
+		if (Input.GetButtonDown("Fire") && BuildModeOn) {
 
-			if (BuildModeOn)
-				DisableBuild ();
-			else
-				EnableBuild ();
+
 
 		}
 
 	}
 
-	void EnableBuild () {
+	public void EnableBuild () {
 
 		Selector.SetActive (true);
 		Grid.showMain = true;
@@ -30,7 +34,7 @@ public class PlayerBuildControl : MonoBehaviour {
 
 	}
 
-	void DisableBuild () {
+	public void DisableBuild () {
 
 		Selector.SetActive (false);
 		Grid.showMain = false;

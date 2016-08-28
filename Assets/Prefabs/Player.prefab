@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012494317764}
   - 212: {fileID: 212000012090336322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,10 +37,12 @@ GameObject:
   - 4: {fileID: 4000012376657604}
   - 212: {fileID: 212000011270646726}
   - 50: {fileID: 50000010498270518}
-  - 114: {fileID: 114000013364068414}
   - 58: {fileID: 58000013658233436}
+  - 114: {fileID: 114000013364068414}
   - 114: {fileID: 114000012307169078}
-  m_Layer: 0
+  - 114: {fileID: 114000012131792834}
+  - 114: {fileID: 114000010357258574}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013485951678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -105,6 +107,35 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &114000010357258574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013485951678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5792c4ffb2c84952a4cb500079d9807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildControl: {fileID: 114000012307169078}
+  ShootingControl: {fileID: 114000012131792834}
+  Phase: 0
+--- !u!114 &114000012131792834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013485951678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87949dac3dd0c44b9a17dfdf9deefa06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 1000011493547750, guid: 3a370716dc74a4fb58e90ce62e24d8de, type: 2}
+  Shooter: {fileID: 4000012494317764}
+  ShootAxis: Fire
+  ShootCooldown: 0.1
 --- !u!114 &114000012307169078
 MonoBehaviour:
   m_ObjectHideFlags: 1
