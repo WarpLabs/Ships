@@ -9,6 +9,7 @@ public class PlayerBuildControl : MonoBehaviour {
 	public GameObject ShipBase;
 	public GameObject ShipWalls;
 	public GameObject ShipGuns;
+	public GameObject ShipSystems;
 
 	public GameObject[] Blocks;
 
@@ -98,6 +99,51 @@ public class PlayerBuildControl : MonoBehaviour {
 					if (objsInArea.Length>0)
 						firstObj = LayerMask.LayerToName (objsInArea [0].gameObject.layer);
 
+					bool AllowCreation = false;
+
+					if (!FirstBlock) {
+
+						for (int i = 0; i < 5; i++) {
+
+							Vector3 selectAdjacent = Vector3.zero;
+
+							if (i == 0)
+								selectAdjacent = Vector3.left;
+							if (i == 1)
+								selectAdjacent = Vector3.right;
+							if (i == 2)
+								selectAdjacent = Vector3.up;
+							if (i == 3)
+								selectAdjacent = Vector3.down;
+							
+							Collider2D[] objsInAdjacent = Physics2D.OverlapBoxAll (Selector.transform.position + selectAdjacent, new Vector2 (0.5f, 0.5f), 0f, ScanMask.value);
+
+							if (objsInAdjacent.Length <= 0)
+								continue;
+
+							foreach (Collider2D check in objsInAdjacent) {
+								
+								if (check.transform.parent.parent != null) {
+
+									if (LayerMask.LayerToName (check.transform.parent.parent.gameObject.layer) == "Ship") {
+
+										AllowCreation = true;
+										break;
+
+									}
+
+								}
+
+							}
+
+						}
+
+					} else
+						AllowCreation = true;
+
+					if (!AllowCreation)
+						continue;
+
 					if (AttemptedBlock == "ShipBase" && objsInArea.Length <= 0) {
 
 						CreateBlock (ShipBase.transform, 1f);
@@ -110,7 +156,7 @@ public class PlayerBuildControl : MonoBehaviour {
 
 					} else if (AttemptedBlock == "ShipSystem" && objsInArea.Length == 1 && firstObj == "ShipBase") {
 
-						CreateBlock (Ship.transform, 0f);
+						CreateBlock (ShipSystems.transform, 0f);
 						break;
 
 					} else if (AttemptedBlock == "ShipGun" && objsInArea.Length == 0) {
@@ -128,6 +174,11 @@ public class PlayerBuildControl : MonoBehaviour {
 
 				//yield return null;
 
+			}
+
+			if (FirstBlock) {
+				FirstBlock = false;
+				Ship.transform.position = new Vector3 (Selector.transform.position.x, Selector.transform.position.y, Ship.transform.position.z);
 			}
 
 		}
