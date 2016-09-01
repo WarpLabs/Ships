@@ -7,17 +7,24 @@ public class PlayerControl : MonoBehaviour {
 	public PlayerShooting ShootingControl;
 
 	public int Phase;
+
+	// Phase -1 = No Phase;
 	// Phase 0 = Building
 	// Phase 1 = Shooting
 
 	void Update () {
 
-		if (Input.GetButtonDown ("Build")) {
+		if (Input.GetButtonDown ("Cancel") && Phase != -1) {
+			Phase = -1;
+			SwitchPhase ();
+		}
+
+		if (Input.GetButtonDown ("Build") && Phase != 0) {
 			Phase = 0;
 			SwitchPhase ();
 		}
 
-		if (Input.GetButtonDown ("One")) {
+		if (Input.GetButtonDown ("One") && Phase != 1) {
 			Phase = 1;
 			SwitchPhase ();
 		}
@@ -30,6 +37,9 @@ public class PlayerControl : MonoBehaviour {
 		ShootingControl.DisableShooting ();
 
 		switch (Phase) {
+
+		case -1:
+			break;
 			
 		case 0:
 			BuildControl.EnableBuild ();

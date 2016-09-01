@@ -5,6 +5,11 @@ public class SelectorMouseControl : MonoBehaviour {
 
 	public float GridSize;
 
+	public GameObject RelativeObject;
+	public bool RelativeGridPosition;
+
+	public float Depth;
+
 	void LateUpdate () {
 
 		UpdateMove ();
@@ -14,13 +19,22 @@ public class SelectorMouseControl : MonoBehaviour {
 	void UpdateMove () {
 
 		Vector2 newSelectorPosition = GetMouseGridPos ();
+		if (RelativeGridPosition)
+			transform.rotation = RelativeObject.transform.rotation;
 		transform.position = newSelectorPosition;
+		transform.Translate (Vector3.forward * Depth);
 
 	}
 
 	Vector2 GetMouseGridPos () {
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+
+		if (RelativeGridPosition) {
+
+			mousePos = RelativeObject.transform.InverseTransformPoint (mousePos);
+
+		}
 
 		float mouseX = mousePos.x;
 		float mouseY = mousePos.y;
@@ -35,10 +49,14 @@ public class SelectorMouseControl : MonoBehaviour {
 
 		Vector2 mouseGridPos = new Vector2 (mouseX, mouseY);
 
+		if (RelativeGridPosition) {
+
+			mouseGridPos = RelativeObject.transform.TransformPoint (mouseGridPos);
+
+		}
+
 		return mouseGridPos;
 
 	}
-
-
 
 }

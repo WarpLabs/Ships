@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012669143174}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bullet Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - 212: {fileID: 212000012614347916}
   - 114: {fileID: 114000011761523890}
   - 61: {fileID: 61000013526626486}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Side_MainGun
   m_TagString: Gun
   m_Icon: {fileID: 0}
