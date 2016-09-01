@@ -7,8 +7,6 @@ TagManager:
   - ShieldGenerator
   - Gun
   - Wall
-  - Base
-  - System
   layers:
   - Default
   - TransparentFX
@@ -21,7 +19,7 @@ TagManager:
   - Player
   - PlayerProjectiles
   - Ship
-  - ShipTile
+  - ShipBase
   - ShipWall
   - ShipGun
   - ShipSystem

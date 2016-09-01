@@ -6,6 +6,9 @@ public class PlayerBuildControl : MonoBehaviour {
 	public GameObject Selector;
 	//public DrawGrid Grid;
 	public GameObject Ship;
+	public GameObject ShipBase;
+	public GameObject ShipWalls;
+	public GameObject ShipGuns;
 
 	public GameObject[] Blocks;
 
@@ -18,6 +21,9 @@ public class PlayerBuildControl : MonoBehaviour {
 
 	private GameObject ReadyBlock;
 
+	private SelectorMouseControl SelectorMovement;
+	private float SelectorRotationDelta;
+
 	void Update () {
 
 		if (ReadyBlock != null) {
@@ -27,11 +33,15 @@ public class PlayerBuildControl : MonoBehaviour {
 
 		}
 
+		SelectorMovement.RotationDelta = SelectorRotationDelta;
+
 	}
 
 	void Start () {
 
 		DisableBuild ();
+
+		SelectorMovement = Selector.GetComponent<SelectorMouseControl> ();
 
 		StartCoroutine (BuildCoroutine ());
 		
@@ -54,11 +64,11 @@ public class PlayerBuildControl : MonoBehaviour {
 
 				yield return null;
 
-				if (Input.GetButtonDown ("SwitchForward") || Input.GetButtonDown ("SwitchBackward")) {
+				if (Input.GetAxisRaw ("Switch") != 0) {
 
-					if (Input.GetButtonDown ("SwitchForward") && CurrentBlock < (Blocks.Length - 1))
+					if (Input.GetAxisRaw ("Switch") > 0 && CurrentBlock < (Blocks.Length - 1))
 						CurrentBlock++;
-					else if (Input.GetButtonDown ("SwitchBackward") && CurrentBlock > 0)
+					else if (Input.GetAxisRaw ("Switch") < 0 && CurrentBlock > 0)
 						CurrentBlock--;
 
 					rend = Blocks [CurrentBlock].GetComponent<SpriteRenderer> ();
@@ -66,44 +76,47 @@ public class PlayerBuildControl : MonoBehaviour {
 
 				}
 
+				if (Input.GetButtonDown ("Rotate")) {
+
+					float degrees = 0f;
+
+					if (Input.GetAxisRaw ("Rotate") > 0)
+						degrees = -90f;
+					else if (Input.GetAxisRaw ("Rotate") < 0)
+						degrees = 90f;
+
+					SelectorRotationDelta += degrees;
+
+				}
+
 				if (Input.GetButtonDown ("Fire") && BuildModeOn) {
 
-					string AttemptedBlock = Blocks [CurrentBlock].tag;
+					string AttemptedBlock = LayerMask.LayerToName(Blocks [CurrentBlock].layer);
 
 					Collider2D[] objsInArea = Physics2D.OverlapBoxAll (Selector.transform.position, new Vector2 (0.5f, 0.5f), 0f, ScanMask.value);
+					string firstObj = "";
+					if (objsInArea.Length>0)
+						firstObj = LayerMask.LayerToName (objsInArea [0].gameObject.layer);
 
-					if (AttemptedBlock == "Base" && objsInArea.Length <= 0) {
+					if (AttemptedBlock == "ShipBase" && objsInArea.Length <= 0) {
 
-						Vector3 noZPos = new Vector3 (Selector.transform.position.x, Selector.transform.position.y, 0.1f);
-
-						if (FirstBlock) {
-							Ship.transform.position = noZPos;
-							FirstBlock = false;
-						}
-
-						GameObject block = Instantiate (Blocks [CurrentBlock], noZPos, Selector.transform.rotation) as GameObject;
-						block.transform.parent = Ship.transform;
+						CreateBlock (ShipBase.transform, 1f);
 						break;
 
-					}
-					else if (AttemptedBlock != "Base" && objsInArea.Length == 1) {
+					} else if (AttemptedBlock == "ShipWall" && objsInArea.Length == 1 && firstObj == "ShipBase") {
 
-						Collider2D objInArea = Physics2D.OverlapBox (Selector.transform.position, new Vector2 (0.5f, 0.5f), 0f, ScanMask.value);
+						CreateBlock (ShipWalls.transform, 0f);
+						break;
 
-						if (objInArea.gameObject.tag == "Base") {
+					} else if (AttemptedBlock == "ShipSystem" && objsInArea.Length == 1 && firstObj == "ShipBase") {
 
-							Vector3 noZPos = new Vector3 (Selector.transform.position.x, Selector.transform.position.y, 0);
+						CreateBlock (Ship.transform, 0f);
+						break;
 
-							if (FirstBlock) {
-								Ship.transform.position = noZPos;
-								FirstBlock = false;
-							}
+					} else if (AttemptedBlock == "ShipGun" && objsInArea.Length == 0) {
 
-							GameObject block = Instantiate (Blocks [CurrentBlock], noZPos, Selector.transform.rotation) as GameObject;
-							block.transform.parent = Ship.transform;
-							break;
-
-						}
+						CreateBlock (ShipGuns.transform, 0f);
+						break;
 
 					}
 
@@ -118,6 +131,20 @@ public class PlayerBuildControl : MonoBehaviour {
 			}
 
 		}
+
+	}
+
+	void CreateBlock (Transform Parent, float zPos) {
+
+		Vector3 noZPos = new Vector3 (Selector.transform.position.x, Selector.transform.position.y, zPos);
+
+		if (FirstBlock) {
+			Ship.transform.position = noZPos;
+			FirstBlock = false;
+		}
+
+		GameObject block = Instantiate (Blocks [CurrentBlock], noZPos, Selector.transform.rotation) as GameObject;
+		block.transform.parent = Parent;
 
 	}
 

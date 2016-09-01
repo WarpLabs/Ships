@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour {
 
 	public int Phase;
 
+
 	// Phase -1 = No Phase;
 	// Phase 0 = Building
 	// Phase 1 = Shooting

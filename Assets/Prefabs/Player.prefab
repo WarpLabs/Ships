@@ -85,7 +85,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 1000013485951678}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
@@ -136,7 +136,11 @@ MonoBehaviour:
   Shooter: {fileID: 4000012494317764}
   ShootAxis: Fire
   ShootCooldown: 0.1
-  ShotSpeed: 1000
+  ShotSpeed: 1500
+  Damage: 3
+  Knockback: 50
+  Stun: 1
+  Lifespan: 3
 --- !u!114 &114000012307169078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Selector: {fileID: 0}
   Ship: {fileID: 0}
+  ShipBase: {fileID: 0}
+  ShipWalls: {fileID: 0}
+  ShipGuns: {fileID: 0}
   Blocks:
   - {fileID: 1000014118770406, guid: 58d1cb131bac07e418aa0a6696603474, type: 2}
   - {fileID: 1000013593233192, guid: bac1ddf20be38f548b809105d7bf34bf, type: 2}

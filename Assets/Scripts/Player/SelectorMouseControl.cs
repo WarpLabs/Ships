@@ -10,6 +10,8 @@ public class SelectorMouseControl : MonoBehaviour {
 
 	public float Depth;
 
+	[HideInInspector] public float RotationDelta;
+
 	void LateUpdate () {
 
 		UpdateMove ();
@@ -19,8 +21,10 @@ public class SelectorMouseControl : MonoBehaviour {
 	void UpdateMove () {
 
 		Vector2 newSelectorPosition = GetMouseGridPos ();
-		if (RelativeGridPosition)
+		if (RelativeGridPosition) {
 			transform.rotation = RelativeObject.transform.rotation;
+			transform.RotateAround (transform.position, transform.forward, RotationDelta);
+		}
 		transform.position = newSelectorPosition;
 		transform.Translate (Vector3.forward * Depth);
 
