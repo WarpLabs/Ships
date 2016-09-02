@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011421966324}
   - 212: {fileID: 212000010526605056}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Side_Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010081763014}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010502895428}
   - 212: {fileID: 212000013977684308}
+<<<<<<< fab61d3157c0a0d22abe852dd2e0980fbf668f59
   m_Layer: 13
+=======
+  - 61: {fileID: 61000011293696000}
+  - 114: {fileID: 114000014120974644}
+  m_Layer: 0
+>>>>>>> please
   m_Name: Side_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

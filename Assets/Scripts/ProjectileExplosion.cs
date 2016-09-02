@@ -3,9 +3,14 @@ using System.Collections;
 
 public class ProjectileExplosion : MonoBehaviour {
 
-	[HideInInspector] public float Damage;
-	[HideInInspector] public float Knockback;
-	[HideInInspector] public float Stun;
+	public float Lifespan = 1f;
+
+	void Start () {
+
+		Invoke ("Explode", Lifespan);
+
+
+	}
 
 	void OnTriggerEnter2D (Collider2D other) {
 
