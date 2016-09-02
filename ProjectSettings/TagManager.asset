@@ -7,7 +7,6 @@ TagManager:
   - ShieldGenerator
   - Gun
   - Wall
-  - Turret
   layers:
   - Default
   - TransparentFX
@@ -19,12 +18,12 @@ TagManager:
   - 
   - Player
   - PlayerProjectiles
-  - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ship
+  - ShipBase
+  - ShipWall
+  - ShipGun
+  - ShipSystem
+  - ShipShield
   - 
   - 
   - 
