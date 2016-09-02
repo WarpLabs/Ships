@@ -92,13 +92,6 @@ public class PlayerBuildControl : MonoBehaviour {
 
 				if (Input.GetButtonDown ("Fire") && BuildModeOn) {
 
-					string AttemptedBlock = LayerMask.LayerToName(Blocks [CurrentBlock].layer);
-
-					Collider2D[] objsInArea = Physics2D.OverlapBoxAll (Selector.transform.position, new Vector2 (0.5f, 0.5f), 0f, ScanMask.value);
-					string firstObj = "";
-					if (objsInArea.Length>0)
-						firstObj = LayerMask.LayerToName (objsInArea [0].gameObject.layer);
-
 					bool AllowCreation = false;
 
 					if (!FirstBlock) {
@@ -123,7 +116,7 @@ public class PlayerBuildControl : MonoBehaviour {
 
 							foreach (Collider2D check in objsInAdjacent) {
 								
-								if (check.transform.parent.parent != null) {
+								if (check.transform.parent != null && check.transform.parent.parent != null) {
 
 									if (LayerMask.LayerToName (check.transform.parent.parent.gameObject.layer) == "Ship") {
 
@@ -143,6 +136,14 @@ public class PlayerBuildControl : MonoBehaviour {
 
 					if (!AllowCreation)
 						continue;
+
+					string AttemptedBlock = LayerMask.LayerToName(Blocks [CurrentBlock].layer);
+
+					Collider2D[] objsInArea = Physics2D.OverlapBoxAll (Selector.transform.position, new Vector2 (0.5f, 0.5f), 0f, ScanMask.value);
+					string firstObj = "";
+					if (objsInArea.Length>0)
+						firstObj = LayerMask.LayerToName (objsInArea [0].gameObject.layer);
+					
 
 					if (AttemptedBlock == "ShipBase" && objsInArea.Length <= 0) {
 

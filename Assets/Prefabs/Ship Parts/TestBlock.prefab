@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012497928798}
   - 212: {fileID: 212000013939656352}
-  m_Layer: 5
+  m_Layer: 17
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - 50: {fileID: 50000011147676788}
   - 114: {fileID: 114000010082248494}
   - 61: {fileID: 61000011619642738}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TestBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -157,11 +157,13 @@ MonoBehaviour:
   ShipBase: {fileID: 0}
   ShipWalls: {fileID: 0}
   ShipGuns: {fileID: 0}
+  ShipSystems: {fileID: 0}
   Blocks:
   - {fileID: 1000014118770406, guid: 58d1cb131bac07e418aa0a6696603474, type: 2}
   - {fileID: 1000013593233192, guid: bac1ddf20be38f548b809105d7bf34bf, type: 2}
   - {fileID: 1000010350999566, guid: 6cf63d532f7938f46ac95e14ff731c2c, type: 2}
   - {fileID: 1000012383380210, guid: 8f2d21c44489e1c4eb8519a2e0c1990f, type: 2}
+  - {fileID: 1000011074815480, guid: 755627e485dca684f971c1e86525fb5b, type: 2}
   ScanMask:
     serializedVersion: 2
     m_Bits: 4294933449
