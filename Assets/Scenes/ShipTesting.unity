@@ -95,9 +95,6 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-<<<<<<< fab61d3157c0a0d22abe852dd2e0980fbf668f59
-    m_TransformParent: {fileID: 0}
-=======
     m_TransformParent: {fileID: 1222103921}
     m_Modifications:
     - target: {fileID: 4000010775840082, guid: bac1ddf20be38f548b809105d7bf34bf, type: 2}
@@ -3017,7 +3014,6 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1746862236}
->>>>>>> please
     m_Modifications:
     - target: {fileID: 4000011501406650, guid: b4dcbb1a37db6734d9148c37401aa386, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3242,6 +3238,18 @@ Prefab:
         type: 2}
       propertyPath: m_LinearDrag
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010804663528, guid: 2e18b97653d7026429c87fef1ae101a3, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013367554972, guid: 2e18b97653d7026429c87fef1ae101a3, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013367554972, guid: 2e18b97653d7026429c87fef1ae101a3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e18b97653d7026429c87fef1ae101a3, type: 2}
