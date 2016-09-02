@@ -27,27 +27,8 @@ public class ShieldCreator : MonoBehaviour {
 
     public float shieldWidth; 
 
-	public bool CreateShieldOnStart;
 
-	public bool CreateShield;
-
-	void Start () {
-
-		if (CreateShieldOnStart)
-			StartCoroutine (CreateShieldOutline ());
-
-	}
-
-	void Update () {
-
-		if (CreateShield) {
-			StartCoroutine (CreateShieldOutline ());
-			CreateShield = false;
-		}
-
-	}
-
-    IEnumerator CreateShieldOutline()
+    IEnumerator Start()
     {
         //Initialize Arrays and Lists
         childXPos = new List<float>();

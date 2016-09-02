@@ -8,7 +8,7 @@ public class ShipMover : MonoBehaviour {
     public float thrust;
     public float turning;
 
-	public bool MovementEnabled;
+
 
     void Start()
     {
@@ -17,12 +17,10 @@ public class ShipMover : MonoBehaviour {
 
      void FixedUpdate()
     {
-		if (MovementEnabled) {
 
-			rb.AddForce (transform.up * Input.GetAxis ("Vertical") * thrust * Time.deltaTime);
-			rb.AddTorque (-Input.GetAxis ("Horizontal") * turning * Time.deltaTime);
 
-		}
+        rb.AddForce(transform.up * Input.GetAxis("Vertical") * thrust * Time.deltaTime);
+        rb.AddTorque(-Input.GetAxis("Horizontal") * turning * Time.deltaTime);
        
     }
 

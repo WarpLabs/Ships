@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012497928798}
   - 212: {fileID: 212000013939656352}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 1000013367554972}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.5
+  m_LinearDrag: 50
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
@@ -116,9 +116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 25
-  HealthBar: {fileID: 4000012497928798}
   weight: 0.9
   armor: 1
+  HealthBar: {fileID: 4000012497928798}
 --- !u!212 &212000012156036184
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -55,8 +55,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013485951678}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -85,7 +85,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 1000013485951678}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_IsKinematic: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildControl: {fileID: 114000012307169078}
   ShootingControl: {fileID: 114000012131792834}
-  Phase: -1
+  Phase: 0
 --- !u!114 &114000012131792834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,11 +136,6 @@ MonoBehaviour:
   Shooter: {fileID: 4000012494317764}
   ShootAxis: Fire
   ShootCooldown: 0.1
-  ShotSpeed: 1500
-  Damage: 3
-  Knockback: 50
-  Stun: 1
-  Lifespan: 3
 --- !u!114 &114000012307169078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,18 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selector: {fileID: 0}
-  Ship: {fileID: 0}
-  ShipBase: {fileID: 0}
-  ShipWalls: {fileID: 0}
-  ShipGuns: {fileID: 0}
-  Blocks:
-  - {fileID: 1000014118770406, guid: 58d1cb131bac07e418aa0a6696603474, type: 2}
-  - {fileID: 1000013593233192, guid: bac1ddf20be38f548b809105d7bf34bf, type: 2}
-  - {fileID: 1000010350999566, guid: 6cf63d532f7938f46ac95e14ff731c2c, type: 2}
-  - {fileID: 1000012383380210, guid: 8f2d21c44489e1c4eb8519a2e0c1990f, type: 2}
-  ScanMask:
-    serializedVersion: 2
-    m_Bits: 4294933449
+  Grid: {fileID: 0}
 --- !u!114 &114000013364068414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,7 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28d4a37727fb4324af0a78f288f1e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveForce: 10
+  MoveForce: 9999999
+  RunSpeed: 5
+  WalkSpeed: 2
 --- !u!212 &212000011270646726
 SpriteRenderer:
   m_ObjectHideFlags: 1
