@@ -5,49 +5,40 @@ public class GunShooter : MonoBehaviour {
 
     public GameObject Bullet;
     public Transform bulletSpawn;
-
-	private Rigidbody2D shipRb2d;
+    private GameObject bullet;
+ 
 
     public float bulletSpeed;
     public float fireWait;
     public float damage;
     public float knockBack;
     public float stun;
-	public float lifespan;
 
-	void Start () {
 
-		shipRb2d = transform.parent.GetComponentInParent<Rigidbody2D> ();
-
-		StartCoroutine (ShootingCheck ());
-
-	}
-
-    IEnumerator ShootingCheck()
+    IEnumerator Start()
     {
-
         while(true)
         {
             if (Input.GetKey(KeyCode.Space) == true || Input.GetKeyDown(KeyCode.Space) == true)
             {
-				GameObject bullet = Instantiate(Bullet, bulletSpawn.position, bulletSpawn.rotation) as GameObject;
-
-				Rigidbody2D bulletRb2d = bullet.GetComponent<Rigidbody2D> ();
-				bulletRb2d.velocity = shipRb2d.velocity;
-				bulletRb2d.AddForce(bulletSpawn.up * bulletSpeed);
-
-				ProjectileExplosion explo = bullet.GetComponent<ProjectileExplosion> ();
-				explo.Damage = damage;
-				explo.Knockback = knockBack;
-				explo.Stun = stun;
-				explo.Invoke ("Explode", lifespan);
-
-                yield return new WaitForSeconds(fireWait);  
-				continue;
+                bullet = (GameObject)Instantiate(Bullet, bulletSpawn.position, bulletSpawn.rotation) ;
+                bullet.transform.parent = transform;
+                bullet.GetComponent<Rigidbody2D>().AddForce(bulletSpawn.right * bulletSpeed);
+                yield return new WaitForSeconds(fireWait);         
             }
             
-            yield return null;
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    }
 
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.transform.parent == transform)
+        {
+            Destroy(other.gameObject);
         }
     }
 
