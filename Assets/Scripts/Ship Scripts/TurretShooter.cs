@@ -22,40 +22,51 @@ public class TurretShooter : MonoBehaviour {
 	private Vector2 direction;
 
 
+    void Start()
+    {
+        StartCoroutine(Shoot());
+    }
+
 	IEnumerator Shoot()
 	{
-		bullet = (GameObject)Instantiate(Bullet, bulletSpawn.position, bulletSpawn.rotation);
-		bullet.transform.parent = transform;
-		bullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed);
+        while (true)
+        {
+            if (target != null)
+            {
+                bullet = (GameObject)Instantiate(Bullet, bulletSpawn.position, bulletSpawn.rotation);
+                bullet.transform.parent = transform;
+                bullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed);
 
-		ProjectileExplosion explo = bullet.GetComponent<ProjectileExplosion> ();
-		explo.Damage = damage;
-		explo.Knockback = knockBack;
-		explo.Stun = stun;
-		explo.Invoke ("Explode", lifespan);
+                ProjectileExplosion explo = bullet.GetComponent<ProjectileExplosion>();
+                explo.Damage = damage;
+                explo.Knockback = knockBack;
+                explo.Stun = stun;
+                explo.Invoke("Explode", lifespan);
 
-		yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(fireWait);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
 	}
 
 
-	void Update()
-	{
-		target = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y), range, enemy);
+    void Update()
+    {
+        target = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y), range, enemy);
 
+        if (target != null)
+        {
+            direction = (target.gameObject.transform.position - transform.position).normalized;
 
-		if (target != null)
-		{
-			direction = (target.gameObject.transform.position - transform.position).normalized;
-
-
-			Vector3 dir = target.gameObject.transform.position - transform.position;
-			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-			angle -= 90f;
-			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-			StartCoroutine(Shoot());
-		}
-	}
+            Vector3 dir = target.gameObject.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            angle -= 90f;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
 
 	//IEnumerator Start()
 	//{
