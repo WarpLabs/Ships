@@ -135,10 +135,10 @@ MonoBehaviour:
   Projectile: {fileID: 1000011493547750, guid: 3a370716dc74a4fb58e90ce62e24d8de, type: 2}
   Shooter: {fileID: 4000012494317764}
   ShootAxis: Fire
-  ShootCooldown: 0.1
+  ShootCooldown: 0.5
   ShotSpeed: 1500
-  Damage: 3
-  Knockback: 50
+  Damage: 55
+  Knockback: 100
   Stun: 1
   Lifespan: 3
 --- !u!114 &114000012307169078

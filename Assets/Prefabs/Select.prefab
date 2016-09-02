@@ -89,3 +89,4 @@ MonoBehaviour:
   RelativeObject: {fileID: 0}
   RelativeGridPosition: 1
   Depth: -15
+  RotationDelta: 0

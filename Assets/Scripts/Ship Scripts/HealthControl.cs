@@ -8,7 +8,6 @@ public class HealthControl : MonoBehaviour {
     private float percentHealth;
     public Transform HealthBar;
 
-    public float weight;
     private float bulletKnockback;
     private float knockBackDone;
     private Vector2 knockBackDirection;
@@ -18,10 +17,14 @@ public class HealthControl : MonoBehaviour {
     public float armor;
     private float bulletDamage;
     private float damageDone;
+
+	public bool AlwaysUp;
     
 
     void Start()
     {
+
+
         totalHealth = health;
 		if (GetComponent<Rigidbody2D>() != null)
 			rb2d = GetComponent<Rigidbody2D> ();
@@ -63,6 +66,15 @@ public class HealthControl : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+		if (AlwaysUp) {
+
+			float parentRot = transform.localEulerAngles.z;
+
+			HealthBar.parent.transform.localRotation = Quaternion.Euler (0, 0, -parentRot);
+
+		}
+
     }
 
 
