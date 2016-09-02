@@ -5,8 +5,6 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	public float MoveForce;
-	public float RunSpeed;
-	public float WalkSpeed;
 
 	private Rigidbody2D rb2d;
 
@@ -25,23 +23,14 @@ public class PlayerMovement : MonoBehaviour {
 
 	void UpdateMove () {
 
-		rb2d.velocity = Vector2.zero;
-
 		Vector2 moveForce = Vector2.zero;
+
 		float horMove = Input.GetAxis ("Horizontal") * MoveForce * Time.deltaTime;
 		float verMove = Input.GetAxis ("Vertical") * MoveForce * Time.deltaTime;
 
 		moveForce = new Vector2 (horMove, verMove);
 
 		rb2d.AddForce (moveForce, ForceMode2D.Impulse);
-
-		if (Input.GetAxis ("Walk") > 0) {
-			if (rb2d.velocity.magnitude > WalkSpeed)
-				rb2d.velocity = Vector2.ClampMagnitude (rb2d.velocity, WalkSpeed);
-		} else {
-			if (rb2d.velocity.magnitude > RunSpeed)
-				rb2d.velocity = Vector2.ClampMagnitude (rb2d.velocity, RunSpeed);
-		}
 
 	}
 

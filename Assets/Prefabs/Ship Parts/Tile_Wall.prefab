@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000010775840082}
   - 212: {fileID: 212000013915266474}
   - 61: {fileID: 61000010348077178}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Tile_Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
