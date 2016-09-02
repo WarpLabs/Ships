@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ShieldGenerator
+  - Gun
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -13,14 +16,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerProjectiles
+  - Ship
+  - ShipBase
+  - ShipWall
+  - ShipGun
+  - ShipSystem
+  - ShipShield
   - 
   - 
   - 
