@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: {fileID: 61000011764091800}
+  color: {r: 0.369, g: 0.957, b: 1, a: 1}
   shieldWidth: 1.3
   CreateShieldOnStart: 0
   CreateShield: 0
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 1000000
-  turning: 500000
+  turning: 1000000
   MovementEnabled: 0
 --- !u!120 &120000011989289288
 LineRenderer:
