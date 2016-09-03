@@ -131,6 +131,9 @@ MonoBehaviour:
   enemy:
     serializedVersion: 2
     m_Bits: 131072
+  ignore:
+    serializedVersion: 2
+    m_Bits: 151552
   bulletSpeed: 1000
   fireWait: 0.05
   damage: 1
