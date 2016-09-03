@@ -10,6 +10,7 @@ public class PlayerBuildControl : MonoBehaviour {
 	public GameObject ShipWalls;
 	public GameObject ShipGuns;
 	public GameObject ShipSystems;
+	public GameObject ShipControls;
 
 	public GameObject[] Blocks;
 
@@ -145,28 +146,41 @@ public class PlayerBuildControl : MonoBehaviour {
 						firstObj = LayerMask.LayerToName (objsInArea [0].gameObject.layer);
 					
 
-					if (AttemptedBlock == "ShipBase" && objsInArea.Length <= 0) {
+					if (objsInArea.Length <= 0) {
 
-						CreateBlock (ShipBase.transform, 1f);
-						break;
+						if (AttemptedBlock == "ShipBase") {
 
-					} else if (AttemptedBlock == "ShipWall" && objsInArea.Length == 1 && firstObj == "ShipBase") {
+							CreateBlock (ShipBase.transform, 1f);
+							break;
 
-						CreateBlock (ShipWalls.transform, 0f);
-						break;
+						} else if (AttemptedBlock == "ShipGun") {
 
-					} else if (AttemptedBlock == "ShipSystem" && objsInArea.Length == 1 && firstObj == "ShipBase") {
+							CreateBlock (ShipGuns.transform, 0f);
+							break;
 
-						CreateBlock (ShipSystems.transform, 0f);
-						break;
+						}
 
-					} else if (AttemptedBlock == "ShipGun" && objsInArea.Length == 0) {
+					} else if (objsInArea.Length == 1 && firstObj == "ShipBase") {
 
-						CreateBlock (ShipGuns.transform, 0f);
-						break;
+						if (AttemptedBlock == "ShipWall") {
+
+							CreateBlock (ShipWalls.transform, 0f);
+							break;
+
+						} else if (AttemptedBlock == "ShipSystem") {
+
+							CreateBlock (ShipSystems.transform, 0f);
+							break;
+
+						} else if (AttemptedBlock == "ShipControl") {
+
+							CreateBlock (ShipControls.transform, 0f);
+							break;
+
+						} 
 
 					}
-
+					 
 				}
 
 				if (BuildModeOn == false) {

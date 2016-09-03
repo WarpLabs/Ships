@@ -20,15 +20,28 @@ public class PlayerControl : MonoBehaviour {
 			SwitchPhase ();
 		}
 
+		if (Input.GetButtonDown ("Interact") && Phase != -2) {
+			InteractCheck ();
+		}
+
+
+
 		if (Input.GetButtonDown ("Build") && Phase != 0) {
 			Phase = 0;
 			SwitchPhase ();
 		}
 
+
+
 		if (Input.GetButtonDown ("One") && Phase != 1) {
 			Phase = 1;
 			SwitchPhase ();
 		}
+
+
+
+
+
 
 	}
 
@@ -41,17 +54,24 @@ public class PlayerControl : MonoBehaviour {
 
 		case -1:
 			break;
-			
+
 		case 0:
 			BuildControl.EnableBuild ();
 			break;
+
+
 
 		case 1:
 			ShootingControl.EnableShooting ();
 			break;
 
-
 		}
+
+
+	}
+
+	void InteractCheck () {
+
 
 
 	}

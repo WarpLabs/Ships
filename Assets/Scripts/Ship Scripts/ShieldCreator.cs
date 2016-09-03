@@ -13,7 +13,7 @@ public class ShieldCreator : MonoBehaviour {
     private LineRenderer shieldLineRenderer;
 
     private float a = 0;
-    private Color color = new Color(0.369f, 0.957f, 1.0f);
+    public Color color = new Color(0.369f, 0.957f, 1.0f);
 
     Vector2 botLeft;
     Vector2 botRight;
@@ -66,15 +66,17 @@ public class ShieldCreator : MonoBehaviour {
         //Add each ship tile's transform.x and transform.y into two seperate lists
         foreach (Transform child in GetComponentsInChildren<Transform>())
         {
-            if (child.gameObject.CompareTag("Wall"))
-            {
-                float x = child.position.x;
-                float y = child.position.y;
+			if (child.transform.parent != null && child.transform.parent.parent != null) {
 
-                childXPos.Add(x);
-                childYPos.Add(y);
-            }
-            
+				float x = child.localPosition.x;
+				float y = child.localPosition.y;
+
+				Debug.Log ("X: " + x + " Y: " + y + " GameObject: " + child.gameObject);
+
+				childXPos.Add (x);
+				childYPos.Add (y);
+
+			}
         }
 
         //Find the corners of the ship by determining max/min values and then adding/subtracting shield width
@@ -91,7 +93,21 @@ public class ShieldCreator : MonoBehaviour {
         //Determine centre of ship tile's and set centre of shield transform (and shield box collider by extension)
         float xOffset = (topLeft.x + topRight.x) / 2f;
         float yOffset = (topLeft.y + botLeft.y) / 2f;
-        shield.transform.position = new Vector3(xOffset,yOffset, 0);
+
+		float xSign = Mathf.Sign (topLeft.x - topRight.x);
+		float ySign = Mathf.Sign (botLeft.x - topLeft.x);
+
+		float xPos = ((xlength * -xSign) / 2f) + topLeft.x;
+		float yPos = ((ylength * -ySign) / 2f) + topLeft.y;
+
+		Debug.Log ("Bot Left: " + botLeft);
+		Debug.Log ("Bot Right: " + botRight);
+		Debug.Log ("Top Left: " + topLeft);
+		Debug.Log ("Top Right: " + topRight);
+		Debug.Log ("XLength: " + xlength + " YLength: " + ylength);
+		Debug.Log ("XSign: " + xSign + " YSign: " + ySign);
+
+		shield.transform.localPosition = new Vector3(xPos,yPos, 0);
 
         //Sets points of corners into an array of Vector3s for LineRenderer, doubles back to reduce "triangle effect" of lines
         shieldCorners[0] = ConvertToVector3Local(botLeft, xOffset, yOffset);
