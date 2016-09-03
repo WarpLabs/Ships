@@ -8,7 +8,8 @@ public class TurretShooter : MonoBehaviour {
 	public Transform bulletSpawn;
 	private GameObject bullet;
 	public LayerMask enemy;
-
+    public LayerMask ignore;
+    
 
 	public float bulletSpeed;
 	public float fireWait;
@@ -18,6 +19,8 @@ public class TurretShooter : MonoBehaviour {
 	public float range;
 	public float lifespan;
 
+
+    private bool LOS; 
 	private Collider2D target;
 	private Vector2 direction;
 
@@ -33,17 +36,25 @@ public class TurretShooter : MonoBehaviour {
         {
             if (target != null)
             {
-                bullet = (GameObject)Instantiate(Bullet, bulletSpawn.position, bulletSpawn.rotation);
-                bullet.transform.parent = transform;
-                bullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed);
+                
+                if(LOS == true)
+                {
+                    bullet = (GameObject)Instantiate(Bullet, bulletSpawn.position, bulletSpawn.rotation);
+                    bullet.transform.parent = transform;
+                    bullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed);
 
-                ProjectileExplosion explo = bullet.GetComponent<ProjectileExplosion>();
-                explo.Damage = damage;
-                explo.Knockback = knockBack;
-                explo.Stun = stun;
-                explo.Invoke("Explode", lifespan);
+                    ProjectileExplosion explo = bullet.GetComponent<ProjectileExplosion>();
+                    explo.Damage = damage;
+                    explo.Knockback = knockBack;
+                    explo.Stun = stun;
+                    explo.Invoke("Explode", lifespan);
 
-                yield return new WaitForSeconds(fireWait);
+                    yield return new WaitForSeconds(fireWait);
+                }
+                else
+                {
+                    yield return null;
+                }                
             }
             else
             {
@@ -56,15 +67,20 @@ public class TurretShooter : MonoBehaviour {
     void Update()
     {
         target = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y), range, enemy);
-
+        
         if (target != null)
         {
-            direction = (target.gameObject.transform.position - transform.position).normalized;
+            LOS = CheckLOS();
+            if (LOS == true)
+            {
+                direction = (target.gameObject.transform.position - transform.position).normalized;
 
-            Vector3 dir = target.gameObject.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            angle -= 90f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                Vector3 dir = target.gameObject.transform.position - transform.position;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                angle -= 90f;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+            
         }
     }
 
@@ -102,5 +118,28 @@ public class TurretShooter : MonoBehaviour {
 			Destroy(other.gameObject);
 		}
 	}
+
+    
+
+    bool CheckLOS()
+    {
+
+        RaycastHit2D hit;
+        hit = Physics2D.Linecast(transform.position, target.gameObject.transform.position,ignore);
+        Debug.DrawLine(transform.position, target.gameObject.transform.position);
+
+        Debug.Log(hit.collider.gameObject.name);
+        Debug.Log(hit.collider.gameObject.tag);
+
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
 
 }
