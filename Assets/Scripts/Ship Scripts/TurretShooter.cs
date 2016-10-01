@@ -21,14 +21,16 @@ public class TurretShooter : MonoBehaviour
     public float range;
     public float lifespan;
 
-
+    private Vector3[] LOSpoints;
     private bool LOS;
     private Collider2D target;
     private Vector2 direction;
-
+    private Color red = new Color(1,0,0,0.2f);
+    
 
     void Start()
     {
+        LOSpoints = new Vector3[2];
         StartCoroutine(Shoot());
     }
 
@@ -60,6 +62,7 @@ public class TurretShooter : MonoBehaviour
             }
             else
             {
+                GetComponent<LineRenderer>().enabled = false;
                 yield return null;
             }
         }
@@ -113,13 +116,13 @@ public class TurretShooter : MonoBehaviour
     //    }
     //}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.transform.parent == transform)
-        {
-            Destroy(other.gameObject);
-        }
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.transform.parent == transform)
+    //    {
+    //        Destroy(other.gameObject);
+    //    }
+    //}
 
 
 
@@ -128,18 +131,27 @@ public class TurretShooter : MonoBehaviour
 
         RaycastHit2D hit;
         hit = Physics2D.Linecast(transform.position, target.gameObject.transform.position, ignore);
-        Debug.DrawLine(transform.position, target.gameObject.transform.position);
+        //Debug.DrawLine(transform.position, target.gameObject.transform.position);
+        LOSpoints[0] = transform.position + transform.up + Vector3.forward;
+        LOSpoints[1] = target.gameObject.transform.position + Vector3.forward;
+        gameObject.GetComponent<LineRenderer>().SetPositions(LOSpoints);
+        gameObject.GetComponent<LineRenderer>().SetColors(red, red);
 
-        Debug.Log(1 << hit.collider.gameObject.layer);
-        Debug.Log(enemy.value);
+        //Debug.Log(1 << hit.collider.gameObject.layer);
+        //Debug.Log(enemy.value);
 
         if (hit.collider != null && (1 << hit.collider.gameObject.layer) == enemy.value)
         {
+            GetComponent<LineRenderer>().enabled = true;
             return true;
+            
+
         }
         else
         {
+            
             return false;
+            
         }
 
     }
